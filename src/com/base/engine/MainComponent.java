@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.base.engine;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lwjgl.opengl.Display;
 
-/**
- *
- * @author Cenobite
- */
 public class MainComponent {
     
     public static final int WIDTH = 800;
@@ -62,7 +53,7 @@ public class MainComponent {
                 if(Window.isCloseRequested())
                     stop();
                 //TODO: Update game
-                
+                Input.update();
                 game.input();
                 game.update();
                 
