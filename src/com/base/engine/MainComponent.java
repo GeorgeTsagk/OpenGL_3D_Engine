@@ -55,6 +55,7 @@ public class MainComponent {
                 if(Window.isCloseRequested())
                     stop();
                 //TODO: Update game
+                Time.setDelta(1/FRAME_CAP);
                 game.input();
                 Input.update();
                 

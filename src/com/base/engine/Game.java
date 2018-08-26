@@ -10,12 +10,18 @@ public class Game {
     public Game(){
         mesh = new Mesh();
         shader = new Shader();
-        Vertex[] data = new Vertex[] {new Vertex(new Vector3f(-1,-1,0)),
+        Vertex[] vertices = new Vertex[] {new Vertex(new Vector3f(-1,-1,0)),
                                       new Vertex(new Vector3f(0,1,0)),
                                       new Vertex(new Vector3f(1,-1,0)),
+                                      new Vertex(new Vector3f(0, -1, 1))
                                       };
         
-        mesh.addVertices(data);
+        int[] indices = new int[]{0, 1, 3,
+                                  3, 1, 2,
+                                  2, 1, 0,
+                                  0, 2, 3};
+        
+        mesh.addVertices(vertices, indices);
         
         transform = new Transform();
         
@@ -39,10 +45,11 @@ public class Game {
     
     float tmp = 0.0f;
     public void update(){
-        tmp += 0.001;
-        
-        transform.setTranslation((float)Math.sin(tmp), 0, 0);
-        transform.setRotation(0,0, (float)Math.sin(tmp) * 10);
+        tmp += Time.getDelta();
+        float sinTemp = (float)Math.sin(tmp);
+        transform.setTranslation(sinTemp, 0, 0);
+        transform.setRotation(0 , sinTemp * 5, 0);
+        //transform.setScale(sinTemp, sinTemp, sinTemp);
     }
     
     public void render(){
@@ -50,7 +57,5 @@ public class Game {
         shader.setUniform("transform", transform.getTransformation());
         mesh.draw();
     }
-    
-    
-    
+      
 }
