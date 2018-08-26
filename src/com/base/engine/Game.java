@@ -8,8 +8,6 @@ public class Game {
     private Shader shader;
     private Transform transform;
     public Game(){
-        
-        mesh = ResourceLoader.loadMesh("monkey.obj");
         mesh = ResourceLoader.loadMesh("box.obj");
         shader = new Shader();
 //        Vertex[] vertices = new Vertex[] {new Vertex(new Vector3f(-1,-1,0)),
@@ -26,6 +24,7 @@ public class Game {
 //        mesh.addVertices(vertices, indices);
         
         transform = new Transform();
+        transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
         
         shader.addVertexShader(ResourceLoader.loadShader("basicVertex.vs.txt"));
         shader.addFragmentShader(ResourceLoader.loadShader("basicFragment.fs.txt"));
@@ -49,14 +48,15 @@ public class Game {
     public void update(){
         tmp += Time.getDelta();
         float sinTemp = (float)Math.sin(tmp);
-        transform.setTranslation(sinTemp, 0, 0);
+        float cosTemp = (float)Math.cos(tmp);
+        transform.setTranslation(sinTemp, cosTemp, 5);
         transform.setRotation(sinTemp * 5 , sinTemp * 5, 0);
-        transform.setScale(0.7f * sinTemp,0.7f *  sinTemp,0.7f *  sinTemp);
+        //transform.setScale(0.5f * sinTemp ,0.5f * sinTemp,0.5f * sinTemp);
     }
     
     public void render(){
         shader.bind();
-        shader.setUniform("transform", transform.getTransformation());
+        shader.setUniform("transform", transform.getProjectedTransformation());
         mesh.draw();
     }
       
