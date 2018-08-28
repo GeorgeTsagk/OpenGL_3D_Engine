@@ -6,8 +6,8 @@ import org.lwjgl.opengl.Display;
 
 public class MainComponent {
     
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 600;
+    public static final int WIDTH = 900;
+    public static final int HEIGHT = 900;
     public static final String TITLE = "3D Engine";
     public static final double FRAME_CAP = 500.0;
     
