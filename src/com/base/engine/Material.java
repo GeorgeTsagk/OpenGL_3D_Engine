@@ -3,10 +3,23 @@ package com.base.engine;
 public class Material {
     private Texture texture;
     private Vector3f color;
+    private float specularIntensity;
+    private float specularPower;
+
     
-    public Material(Texture texture, Vector3f color){
+    public Material(Texture texture, Vector3f color, float specularIntensity, float specularPower){
         this.texture = texture;
         this.color = color;
+        this.specularPower = specularPower;
+        this.specularIntensity = specularIntensity;
+    }
+    
+    public Material(Texture texture, Vector3f color){
+        this(texture, color, 2, 32);
+    }
+    
+    public Material(Texture texture){
+        this(texture, new Vector3f(1, 1, 1));
     }
     
     public Texture getTexture() {
@@ -25,4 +38,19 @@ public class Material {
         this.color = color;
     }
     
+    public float getSpecularIntensity() {
+        return specularIntensity;
+    }
+
+    public void setSpecularIntensity(float specularIntensity) {
+        this.specularIntensity = specularIntensity;
+    }
+
+    public float getSpecularPower() {
+        return specularPower;
+    }
+
+    public void setSpecularPower(float specularExponent) {
+        this.specularPower = specularExponent;
+    }
 }

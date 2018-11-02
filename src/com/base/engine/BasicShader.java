@@ -9,9 +9,10 @@ public class BasicShader extends Shader{
         compileShader();
         
         addUniform("transform");
-        addUniform("color");
+        addUniform("baseColor");
     }
     
+    @Override
     public void updateUniforms(Matrix4f worldMatrix, Matrix4f projectedMatrix, Material material){
         
         if(material.getTexture() != null){

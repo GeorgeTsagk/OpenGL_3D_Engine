@@ -2,7 +2,6 @@ package com.base.engine;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.lwjgl.opengl.Display;
 
 public class MainComponent {
     
@@ -54,13 +53,10 @@ public class MainComponent {
                 unprocessedTime -= frameTime;
                 if(Window.isCloseRequested())
                     stop();
-                //TODO: Update game
                 Time.setDelta(1/FRAME_CAP);
                 game.input();
                 Input.update();
-                
                 game.update();
-                
                 if(frameCounter >= Time.SECOND){
                     System.out.println(frames);
                     frames = 0;
