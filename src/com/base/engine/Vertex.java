@@ -7,22 +7,22 @@ public class Vertex
 	private Vector3f pos;
 	private Vector2f texCoord;
 	private Vector3f normal;
-        
+	
 	public Vertex(Vector3f pos)
 	{
 		this(pos, new Vector2f(0,0));
 	}
 	
-        public Vertex(Vector3f pos, Vector2f texCoord)
+	public Vertex(Vector3f pos, Vector2f texCoord)
 	{
-		this(pos, texCoord, new Vector3f(0, 0, 0));
+		this(pos, texCoord, new Vector3f(0,0,0));
 	}
-        
+	
 	public Vertex(Vector3f pos, Vector2f texCoord, Vector3f normal)
 	{
 		this.pos = pos;
 		this.texCoord = texCoord;
-                this.normal = normal;
+		this.normal = normal;
 	}
 
 	public Vector3f getPos()
@@ -44,12 +44,14 @@ public class Vertex
 	{
 		this.texCoord = texCoord;
 	}
-        
-        public Vector3f getNormal() {
-            return normal;
-        }
 
-        public void setNormal(Vector3f normal) {
-            this.normal = normal;
-        }
+	public Vector3f getNormal()
+	{
+		return normal;
+	}
+
+	public void setNormal(Vector3f normal)
+	{
+		this.normal = normal;
+	}
 }

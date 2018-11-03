@@ -1,5 +1,7 @@
 package com.base.engine;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
@@ -138,16 +140,16 @@ public class Input
 	public static final int KEY_POWER           = 0xDE;
 	public static final int KEY_SLEEP           = 0xDF;
 	
-	private static boolean[] m_lastKeys = new boolean[NUM_KEYCODES];
-	private static boolean[] m_lastMouse = new boolean[NUM_MOUSEBUTTONS];
+	private static boolean[] lastKeys = new boolean[NUM_KEYCODES];
+	private static boolean[] lastMouse = new boolean[NUM_MOUSEBUTTONS];
 	
 	public static void update()
 	{
 		for(int i = 0; i < NUM_KEYCODES; i++)
-			m_lastKeys[i] = getKey(i);
+			lastKeys[i] = getKey(i);
 		
 		for(int i = 0; i < NUM_MOUSEBUTTONS; i++)
-			m_lastMouse[i] = getMouse(i);
+			lastMouse[i] = getMouse(i);
 	}
 	
 	public static boolean getKey(int keyCode)
@@ -157,12 +159,12 @@ public class Input
 	
 	public static boolean getKeyDown(int keyCode)
 	{
-		return getKey(keyCode) && !m_lastKeys[keyCode];
+		return getKey(keyCode) && !lastKeys[keyCode];
 	}
 	
 	public static boolean getKeyUp(int keyCode)
 	{
-		return !getKey(keyCode) && m_lastKeys[keyCode];
+		return !getKey(keyCode) && lastKeys[keyCode];
 	}
 	
 	public static boolean getMouse(int mouseButton)
@@ -172,12 +174,12 @@ public class Input
 	
 	public static boolean getMouseDown(int mouseButton)
 	{
-		return getMouse(mouseButton) && !m_lastMouse[mouseButton];
+		return getMouse(mouseButton) && !lastMouse[mouseButton];
 	}
 	
 	public static boolean getMouseUp(int mouseButton)
 	{
-		return !getMouse(mouseButton) && m_lastMouse[mouseButton];
+		return !getMouse(mouseButton) && lastMouse[mouseButton];
 	}
 	
 	public static Vector2f getMousePosition()

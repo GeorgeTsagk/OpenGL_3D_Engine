@@ -1,3 +1,5 @@
+#version 330
+
 const int MAX_POINT_LIGHTS = 4;
 
 in vec2 texCoord0;
