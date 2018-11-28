@@ -7,8 +7,8 @@ public class Game
 	private Transform transform;
 	private Camera camera;
 	
-	PointLight pLight1 = new PointLight(new BaseLight(new Vector3f(1,0.5f,0), 1), new Attenuation(0,0,0.05f), new Vector3f(-3,0,5f));
-	PointLight pLight2 = new PointLight(new BaseLight(new Vector3f(0,0.5f,1), 1), new Attenuation(0,0,0.01f), new Vector3f(2,0,7f));
+	PointLight pLight1 = new PointLight(new BaseLight(new Vector3f(1,0.5f,0), 0.2f), new Attenuation(0,0,0.002f), new Vector3f(-3,0,1), 30);
+	PointLight pLight2 = new PointLight(new BaseLight(new Vector3f(0,0.5f,1), 0.4f), new Attenuation(0,0,0.01f), new Vector3f(2,0,1), 30);
 	
 	public Game()
 	{
