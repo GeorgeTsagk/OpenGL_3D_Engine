@@ -7,13 +7,16 @@ public class Game
 	private Transform transform;
 	private Camera camera;
 	
-	PointLight pLight1 = new PointLight(new BaseLight(new Vector3f(1,0.5f,0), 0.2f), new Attenuation(0,0,0.002f), new Vector3f(-3,0,1), 30);
-	PointLight pLight2 = new PointLight(new BaseLight(new Vector3f(0,0.5f,1), 0.4f), new Attenuation(0,0,0.01f), new Vector3f(2,0,1), 30);
-	
+	PointLight pLight1 = new PointLight(new BaseLight(new Vector3f(1,0.5f,0), 0.2f), new Attenuation(0,0.2f,0.01f), new Vector3f(-3,0,1), 45);
+	PointLight pLight2 = new PointLight(new BaseLight(new Vector3f(0,0.5f,1), 0.1f), new Attenuation(0,0.2f,0.01f), new Vector3f(2,0,1), 45);
+        PointLight pLight3 = new PointLight(new BaseLight(new Vector3f(0,1,0), 0.1f), new Attenuation(0,0.1f,0.01f), new Vector3f(4,0,1), 45);
+	SpotLight sLight1 = new SpotLight(new PointLight(new BaseLight(new Vector3f(0,1f,1f), 0.8f), new Attenuation(0,0,0.1f), new Vector3f(-3,0,1), 45),
+                                          new Vector3f(1, 1, 1),
+                                          0.7f);
 	public Game()
 	{
 		mesh = new Mesh();//ResourceLoader.loadMesh("box.obj");
-		material = new Material(ResourceLoader.loadTexture("rinosma.jpg"), new Vector3f(1,1,1), 1, 8);
+		material = new Material(ResourceLoader.loadTexture("marble.jpg"), new Vector3f(1,1,1), 1, 8);
 		shader = PhongShader.getInstance();
 		camera = new Camera();
 		transform = new Transform();
@@ -38,13 +41,13 @@ public class Game
 //				2, 3, 0,
 //				1, 2, 0 };
 		
-		float fieldDepth = 10.0f;
-		float fieldWidth = 10.0f;
+		float fieldDepth = 35.0f;
+		float fieldWidth = 35.0f;
 		
 		Vertex[] vertices = new Vertex[] { 	new Vertex( new Vector3f(-fieldWidth, 0.0f, -fieldDepth), new Vector2f(0.0f, 0.0f)),
-											new Vertex( new Vector3f(-fieldWidth, 0.0f, fieldDepth * 3), new Vector2f(0.0f, 1.0f)),
-											new Vertex( new Vector3f(fieldWidth * 3, 0.0f, -fieldDepth), new Vector2f(1.0f, 0.0f)),
-											new Vertex( new Vector3f(fieldWidth * 3, 0.0f, fieldDepth * 3), new Vector2f(1.0f, 1.0f))};
+							new Vertex( new Vector3f(-fieldWidth, 0.0f, fieldDepth * 3), new Vector2f(0.0f, 1.0f)),
+							new Vertex( new Vector3f(fieldWidth * 3, 0.0f, -fieldDepth), new Vector2f(1.0f, 0.0f)),
+							new Vertex( new Vector3f(fieldWidth * 3, 0.0f, fieldDepth * 3), new Vector2f(1.0f, 1.0f))};
 		
 		int indices[] = { 0, 1, 2,
 					      2, 1, 3};
@@ -54,10 +57,11 @@ public class Game
 		Transform.setProjection(70f, Window.getWidth(), Window.getHeight(), 0.1f, 1000);
 		Transform.setCamera(camera);
 		
-		PhongShader.setAmbientLight(new Vector3f(0.1f,0.1f,0.1f));
+		PhongShader.setAmbientLight(new Vector3f(0.05f,0.05f,0.05f));
 		//PhongShader.setDirectionalLight(new DirectionalLight(new BaseLight(new Vector3f(1,1,1), 0.8f), new Vector3f(1,1,1)));
 	
-		PhongShader.setPointLight(new PointLight[]{pLight1, pLight2});
+		//PhongShader.setPointLight(new PointLight[]{pLight1, pLight2,pLight3});
+                PhongShader.setSpotLight(new SpotLight[]{sLight1});
 	}
 	
 	public void input()
@@ -86,9 +90,11 @@ public class Game
 		transform.setTranslation(0, -1, 5);
 		//transform.setRotation(0, sinTemp * 180, 0);
 		
-		pLight1.setPosition(new Vector3f(8*(float)Math.sin(temp),0,8.0f * (float)(Math.sin(temp) + 1.0/2.0) + 10));
-		pLight2.setPosition(new Vector3f(7,8*(float)Math.sin(temp),8.0f * (float)(Math.cos(temp) + 1.0/2.0) + 10));
-		
+		pLight1.setPosition(new Vector3f(8*(float)Math.sin(temp),2*(float)Math.sin(temp)+2,8.0f * (float)(Math.sin(temp) + 1.0/2.0) + 10));
+		pLight2.setPosition(new Vector3f(5*(float)Math.sin(temp),1,8.0f * (float)(Math.cos(temp) + 1.0/2.0) + 10));
+                pLight3.setPosition(new Vector3f(5,2,25*(float)Math.sin(0.25f*temp)));
+		sLight1.getPointLight().setPosition(camera.getPos());
+                sLight1.setDirection(camera.getForward());
 		//transform.setScale(0.7f * sinTemp, 0.7f * sinTemp, 0.7f * sinTemp);
 	}
 	
