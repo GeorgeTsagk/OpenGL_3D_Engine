@@ -109,16 +109,14 @@ public class ResourceLoader
 			
 			meshReader.close();
 			
-			Mesh res = new Mesh();
 			Vertex[] vertexData = new Vertex[vertices.size()];
 			vertices.toArray(vertexData);
 			
 			Integer[] indexData = new Integer[indices.size()];
 			indices.toArray(indexData);
 			
-			res.addVertices(vertexData, Util.toIntArray(indexData), true);
+			//addVertices(vertexData, Util.toIntArray(indexData), true);
 			
-			return res;
 		}
 		catch(Exception e)
 		{
